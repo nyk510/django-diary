@@ -128,4 +128,3 @@ AWS_ACCESS_KEY = env.AWS.key_id
 AWS_SECRET_KEY = env.AWS.secret_key
 AWS_STORAGE_BUCKET_NAME = env.AWS.bucket
 AWS_S3_REGION_NAME = env.AWS.region
-
