@@ -11,6 +11,8 @@ class Author(models.Model):
     name = models.CharField(max_length=31)
     gender = models.IntegerField(choices=GENDER_CHOICES)
     description = models.TextField("自己紹介文")
+    avater = models.ImageField(
+        upload_to="images/avater", default="images/avater/default.png")
 
     def __str__(self):
         return "{0.id} {0.name}".format(self)
@@ -28,5 +30,4 @@ class Article(models.Model):
     author = models.ForeignKey(Author, models.SET_NULL, null=True)
     title = models.CharField(max_length=511)
     body = models.TextField("本文")
-    main_image = models.ImageField(null=True)
-
+    main_image = models.ImageField(upload_to="images/article/", null=True)
