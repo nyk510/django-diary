@@ -1,4 +1,5 @@
 const nodeExternals = require('webpack-node-externals')
+require('dotenv').config()
 
 module.exports = {
   /*
@@ -40,6 +41,11 @@ module.exports = {
   loading: {
     color: '#3B8070'
   },
+
+  modules: [
+    '@nuxtjs/axios'
+  ],
+
   /*
    ** Build configuration
    */
@@ -55,7 +61,8 @@ module.exports = {
       ]
     },
     vendor: [
-      '~/plugins/vuetify.js'
+      '~/plugins/vuetify.js',
+      'axios'
     ],
     extractCSS: true,
     /*
