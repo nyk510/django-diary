@@ -11,19 +11,16 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from . import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-(57nrow!o+d6ht&eb*g%4ww(^%_b&m3p4l)+-_8^3spil0ygy'
+SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.MODE == "development"
 
 ALLOWED_HOSTS = []
 
@@ -106,9 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = env.LOCALE
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = env.TIME_ZONE
 
 USE_I18N = True
 
@@ -124,3 +121,11 @@ STATIC_URL = '/static/'
 
 
 # django-storages
+AWS_AUTO_CREATE_BUCKET = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY = env.AWS.key_id
+AWS_SECRET_KEY = env.AWS.secret_key
+AWS_STORAGE_BUCKET_NAME = env.AWS.bucket
+AWS_S3_REGION_NAME = env.AWS.region
+

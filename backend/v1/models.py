@@ -28,3 +28,5 @@ class Article(models.Model):
     author = models.ForeignKey(Author, models.SET_NULL, null=True)
     title = models.CharField(max_length=511)
     body = models.TextField("本文")
+    main_image = models.ImageField(null=True)
+
