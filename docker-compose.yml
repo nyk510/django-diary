@@ -1,0 +1,26 @@
+version: '2'
+services:
+  # mysql
+  db:
+    image: mysql:8.0.11
+    container_name: django-diary-mysql80
+    ports:
+      - "3333:3306"
+    volumes:
+      - $PWD/mysql/volumes:/var/lib/mysql  # mysqlのデータ永続化するディレクトリの絶対パス
+      - $PWD/mysql/:/etc/mysql/conf.d  # mysqlのmy.confのおくディレクトリの絶対パス
+    environment:
+      MYSQL_ROOT_PASSWORD: hogehoge
+  # python-django
+  dev_app:
+    build: ./docker/django/
+    container_name: django-diary
+    volumes:
+      - $PWD/backend:/var/www/django
+      - $PWD/nginx:/etc/nginx/conf.d
+    ports:
+      - "7999:8000"
+    command: python3 manage.py runserver 0.0.0.0:8000
+    env_file: .env
+    depends_on:
+      - db
