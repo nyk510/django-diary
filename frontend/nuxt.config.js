@@ -1,4 +1,3 @@
-const nodeExternals = require('webpack-node-externals')
 require('dotenv').config()
 
 module.exports = {
@@ -50,16 +49,6 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    babel: {
-      plugins: [
-        ['transform-imports', {
-          'vuetify': {
-            'transform': 'vuetify/es5/components/${member}',
-            'preventFullImport': true
-          }
-        }]
-      ]
-    },
     vendor: [
       '~/plugins/vuetify.js',
       'axios'
@@ -76,13 +65,6 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
-      }
-      if (ctx.isServer) {
-        config.externals = [
-          nodeExternals({
-            whitelist: [/^vuetify/]
-          })
-        ]
       }
     }
   }
