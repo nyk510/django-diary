@@ -1,0 +1,7 @@
+mysql/volumes
+.env
+
+# sqlight db
+db.sqlite3
+
+*.pyc
